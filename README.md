@@ -42,28 +42,6 @@ pip install torch torchvision numpy pandas matplotlib scikit-learn seaborn pillo
 └── README.md               # 项目说明
 ```
 
-## 代码管理说明
-
-### 大文件处理
-
-本项目可能会生成较大的文件（如模型权重、数据集等），这些文件不适合直接提交到Git仓库。我们采用以下策略处理大文件：
-
-1. 数据集文件：不包含在代码仓库中，用户需按照上述说明自行下载
-2. 模型权重文件：训练后生成的模型权重文件保存在`logs/`目录下，可根据需要选择是否提交
-
-如果确实需要提交大文件（>100MB），建议使用Git LFS（Large File Storage）：
-
-```bash
-# 安装Git LFS
-git lfs install
-
-# 跟踪大文件（例如模型权重文件）
-git lfs track "*.pth"
-git lfs track "*.zip"
-
-# 确保.gitattributes被跟踪
-git add .gitattributes
-```
 
 ## 使用方法
 
