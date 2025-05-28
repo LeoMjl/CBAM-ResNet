@@ -1,0 +1,21 @@
+# Python缓存文件
+__pycache__/
+*.py[cod]
+*$py.class
+
+# 虚拟环境
+venv/
+env/
+
+# 日志文件
+*.log
+
+# 模型权重文件（如果太大）
+# *.pth
+
+# 数据集（如果太大）
+# data/lfw-deepfunneled/
+
+# IDE配置
+.vscode/
+.idea/
