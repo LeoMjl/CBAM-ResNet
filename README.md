@@ -26,9 +26,9 @@ pip install torch torchvision numpy pandas matplotlib scikit-learn seaborn pillo
 
 ```
 .
-├── data/                   # 存放数据集和预处理后的数据
-│   └── lfw-deepfunneled/   # LFW数据集
-│   └── people.csv          # 人物信息CSV文件
+├── data/                   # 存放数据集和预处理后的数据（需自行下载）
+│   └── lfw-deepfunneled/   # LFW数据集（需自行下载）
+│   └── people.csv          # 人物信息CSV文件（自动生成）
 ├── models/                 # 存放模型定义
 │   ├── resnet.py           # 标准ResNet模型
 │   ├── cbam.py             # CBAM注意力机制模块
@@ -42,13 +42,61 @@ pip install torch torchvision numpy pandas matplotlib scikit-learn seaborn pillo
 └── README.md               # 项目说明
 ```
 
+## 代码管理说明
+
+### 大文件处理
+
+本项目可能会生成较大的文件（如模型权重、数据集等），这些文件不适合直接提交到Git仓库。我们采用以下策略处理大文件：
+
+1. 数据集文件：不包含在代码仓库中，用户需按照上述说明自行下载
+2. 模型权重文件：训练后生成的模型权重文件保存在`logs/`目录下，可根据需要选择是否提交
+
+如果确实需要提交大文件（>100MB），建议使用Git LFS（Large File Storage）：
+
+```bash
+# 安装Git LFS
+git lfs install
+
+# 跟踪大文件（例如模型权重文件）
+git lfs track "*.pth"
+git lfs track "*.zip"
+
+# 确保.gitattributes被跟踪
+git add .gitattributes
+```
+
 ## 使用方法
 
-### 1. 准备数据
+### 1. 克隆仓库
 
-将LFW数据集放在`data/lfw-deepfunneled/lfw-deepfunneled`目录下，确保`data/people.csv`文件存在。
+```bash
+git clone https://github.com/LeoMjl/CBAM-ResNet.git
+cd CBAM-ResNet
+```
 
-### 2. 运行程序
+### 2. 准备数据
+
+本项目使用LFW（Labeled Faces in the Wild）数据集进行人脸识别任务。由于数据集较大，不包含在代码仓库中，请按照以下步骤自行下载和准备数据：
+
+1. 下载LFW数据集的deepfunneled版本：
+   - 访问[LFW官方网站](http://vis-www.cs.umass.edu/lfw/)
+   - 下载"All images aligned with deep funneling"(lfw-deepfunneled.tgz)
+
+2. 解压下载的文件，并将解压后的`lfw-deepfunneled`文件夹放在项目的`data/`目录下
+
+3. 确保数据结构如下：
+   ```
+   data/
+   └── lfw-deepfunneled/
+       └── Aaron_Eckhart/
+       └── Aaron_Guiel/
+       └── Aaron_Patterson/
+       └── ...
+   ```
+
+4. 项目会自动生成必要的CSV文件（如`people.csv`等）
+
+### 3. 运行程序
 
 ```bash
 python main.py
@@ -62,7 +110,7 @@ python main.py
 4. 评估两个模型的性能
 5. 生成对比报告和可视化结果
 
-### 3. 查看结果
+### 4. 查看结果
 
 训练完成后，可以在`results/`目录下查看以下结果：
 

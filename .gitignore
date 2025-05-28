@@ -14,7 +14,9 @@ env/
 # *.pth
 
 # 数据集（如果太大）
-# data/lfw-deepfunneled/
+data/lfw-deepfunneled/
+data/archive.zip
+data/*.zip
 
 # IDE配置
 .vscode/
